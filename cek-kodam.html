@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kodam Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        text-align: center;
+        margin-top: 50px;
+      }
+      #kodamResult {
+        margin-top: 20px;
+        font-size: 1.5em;
+        color: #333;
+      }
+      input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        font-size: 1em;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1em;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Kodam Generator</h1>
+    <p>Masukkan Nama Kamu dan Temukan Kodam Kamu!</p>
+    <input type="text" id="nameInput" placeholder="Masukkan Nama Kamu" />
+    <br />
+    <button onclick="generateKodam()">Dapatkan Kodam</button>
+
+    <div id="kodamResult"></div>
+
+    <script>
+      const kodam = [
+        "Kucing Berkokok",
+        "Bebek Bermotor",
+        "Ular Bersepatu",
+        "Gajah Melompat",
+        "Sapi Terbang",
+        "Kambing Selam",
+        "Ayam Menyelam",
+        "Singa Berkumis",
+        "Kelinci Beranting",
+        "Jerapah Bersepatu Roda",
+        "Panda Berjoget",
+        "Kuda Main Gitar",
+        "Lumba-lumba Naik Sepeda",
+        "Semut Berpacu",
+        "Harimau Berdasi",
+        "Ikan Berjalan",
+        "Kerbau Berkacamata",
+        "Kelelawar Berjemur",
+        "Elang Berponi",
+        "Zebra Menyanyi",
+        "Anjing Berselimut",
+        "Kucing Berkacamata",
+        "Bebek Berbaju",
+        "Ular Berselendang",
+        "Gajah Berpayung",
+        "Sapi Bersepatu",
+        "Kambing Berdasi",
+        "Ayam Bersepeda",
+        "Singa Bermain Piano",
+        "Kelinci Bermain Drum",
+        "Jerapah Bersantai",
+        "Panda Bersepatu Roda",
+        "Kuda Berkaraoke",
+        "Lumba-lumba Bersyal",
+        "Semut Berjas",
+        "Harimau Bersandal",
+        "Ikan Bersepeda",
+        "Kerbau Berponi",
+        "Kelelawar Bersepatu",
+        "Elang Bermain Biola",
+        "Zebra Berpakaian Adat",
+        "Anjing Bermain Drum",
+        "Kucing Berjoget",
+        "Bebek Berpiano",
+        "Ular Berdasi",
+        "Gajah Bermain Gitar",
+        "Sapi Berjas",
+        "Kambing Bermotor",
+        "Ayam Beranting",
+        "Singa Berkacamata Hitam",
+        "Kelinci Berpacu",
+        "Jerapah Berselimut",
+        "Panda Bersendok",
+        "Kuda Berbaju Zirah",
+        "Lumba-lumba Bermain Kendang",
+        "Semut Bersarung",
+        "Harimau Berpiano",
+        "Ikan Bermain Suling",
+        "Kerbau Bermain Gitar",
+        "Kelelawar Berpakaian Adat",
+        "Elang Berjas",
+        "Zebra Berpiano",
+        "Anjing Bersendal Jepit",
+        "Kucing Bersepatu Roda",
+        "Bebek Bersepeda Motor",
+        "Ular Bermain Kendang",
+        "Gajah Berpakaian Adat",
+        "Sapi Bermain Piano",
+        "Kambing Beranting",
+        "Ayam Berpayung",
+        "Singa Bermain Kendang",
+        "Kelinci Berpiano",
+        "Jerapah Berjas",
+        "Panda Bermain Suling",
+        "Kuda Bersepatu Roda",
+        "Lumba-lumba Bermain Biola",
+        "Semut Bermain Gitar",
+        "Harimau Beranting",
+        "Es Krim Meleleh",
+        "Sepatu Berbicara",
+        "Payung Terbang",
+        "Sapu Berdansa",
+        "Meja Berlari",
+        "Kipas Angin Bernyanyi",
+        "Gitar Berjalan",
+        "Piring Berputar",
+        "Buku Melompat",
+        "Lampu Tidur",
+        "Radio Berbicara",
+        "Teko Berjalan",
+        "Kursi Berpacu",
+        "Kunci Menyanyi",
+        "Cermin Berjoget",
+        "Panci Berdendang",
+        "Lemari Bersepatu",
+        "Sandal Bermain Gitar",
+        "Pintu Bernyanyi",
+        "Jendela Berlari",
+        "Laptop Berdansa",
+        "Jam Tangan Melompat",
+        "Guling Berlari",
+        "Bantal Bernyanyi",
+        "Gorden Menari",
+        "Piring Terbang",
+        "Kancing Berbicara",
+        "Kulkas Berdansa",
+        "TV Bermain Drum",
+        "Mouse Melompat",
+        "Keyboard Menyanyi",
+        "Gelas Berjalan",
+        "Bunga Berbicara",
+        "Tali Sepatu Berdendang",
+        "Penggaris Berdansa",
+        "Bola Lampu Melompat",
+        "Kasur Berlari",
+        "Kalender Bernyanyi",
+        "Stiker Berpindah Tempat",
+        "Helm Berdansa",
+        "Baterai Berbicara",
+        "Pena Menari",
+        "Penghapus Berlari",
+        "Tisu Menyanyi",
+        "Sendok Berdendang",
+        "Panci Melompat",
+        "Pisau Berpacu",
+        "Spidol Bernyanyi",
+        "Jam Dinding Berdansa",
+        "Sikat Gigi Berjalan",
+        "Senter Melompat",
+        "Ember Menari",
+        "Pasta Gigi Bernyanyi",
+        "Remote TV Berdendang",
+        "Sapu Lidi Berlari",
+        "Ember Berbicara",
+        "Jendela Menari",
+        "Spatula Berjalan",
+        "Gantungan Kunci Bernyanyi",
+        "Sikat Sepatu Berpindah Tempat",
+        "Lemari Es Berdansa",
+        "Handuk Berlari",
+        "Sapu Berbicara",
+        "Panci Menyanyi",
+        "Cangkir Berjalan",
+        "Pisau Dapur Berdendang",
+        "Palu Berdansa",
+        "Obeng Berlari",
+        "Tang Menyanyi",
+        "Kabel Berdendang",
+        "Charger Berpindah Tempat",
+        "Bantal Menyanyi",
+        "Baterai Berlari",
+        "Sapu Tangan Berdansa",
+        "Botol Air Berbicara",
+        "Kancing Menari",
+        "Kaca Mata Berdendang",
+        "Jaket Berpacu",
+        "Selimut Berjalan",
+        "Gelas Plastik Menyanyi",
+        "Karet Gelang Berlari",
+        "Stop Kontak Berdansa",
+        "Saklar Lampu Berbicara",
+        "Gunting Kuku Berdendang",
+        "Topi Berlari",
+        "Bantal Guling Menyanyi",
+        "Kipas Angin Berpacu",
+        "Peniti Berdansa",
+        "Jarum Jahit Berjalan",
+        "Korek Api Berdendang",
+        "Sendok Makan Berlari",
+      ];
+
+      function generateKodam() {
+        const name = document.getElementById("nameInput").value;
+        if (name) {
+          const randomKodam = kodam[Math.floor(Math.random() * kodam.length)];
+          document.getElementById(
+            "kodamResult"
+          ).innerHTML = `${name}, kodam kamu adalah ${randomKodam}`;
+        } else {
+          alert("Masukkan nama kamu terlebih dahulu!");
+        }
+      }
+    </script>
+  </body>
+</html>
